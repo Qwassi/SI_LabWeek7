@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//import the model
 import com.example.model.CalculateShippingPrice;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
