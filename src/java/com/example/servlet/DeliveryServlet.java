@@ -5,17 +5,18 @@
  */
 package com.example.servlet;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.RequestDispatcher;
 //import the model
 import com.example.model.CalculateShippingPrice;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+//import the databse class
+import com.example.database.Database;
 
 /**
  *
@@ -31,12 +32,21 @@ public class DeliveryServlet extends HttpServlet {
         response.setContentType("text/html");
 
         double weight = Double.parseDouble(request.getParameter("weight"));
+        double pricePerKg;
         double shippingPrice;
+        String sqlExecutionStatus;
         CalculateShippingPrice calculateShippingPrice = new CalculateShippingPrice();
-        shippingPrice = calculateShippingPrice.performCalculation(weight);
+        pricePerKg = calculateShippingPrice.calculatePricePerKg(weight);
+        shippingPrice = calculateShippingPrice.calculateTotalShippingPrice(pricePerKg,weight);
+        
+        //Database related tasks
+        Database db = (Database)getServletContext().getAttribute("database");
+        sqlExecutionStatus = db.executeSql(weight, shippingPrice);
         
         request.setAttribute("weight", weight);
+        request.setAttribute("pricePerKg", pricePerKg);
         request.setAttribute("shippingPrice", shippingPrice);
+        request.setAttribute("sqlExecutionStatus", sqlExecutionStatus);
 
         //ServletContext servletContext = getServletContext();
         //Alternative - use request.getRequestDispatcher()

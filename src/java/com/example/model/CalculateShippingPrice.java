@@ -17,7 +17,7 @@ public class CalculateShippingPrice {
 
     }
 
-    public double performCalculation(double weight) {
+    public double calculatePricePerKg(double weight) {
         if (weight < 2.5) {
             pricePerKg = 3.5;
         } else if (weight >= 2.5 && weight <= 5.0) {
@@ -26,5 +26,9 @@ public class CalculateShippingPrice {
             pricePerKg = 2.45;
         }
         return pricePerKg;
+    }
+    
+    public double calculateTotalShippingPrice(double pricePerKg, double weight){
+        return pricePerKg * weight;
     }
 }

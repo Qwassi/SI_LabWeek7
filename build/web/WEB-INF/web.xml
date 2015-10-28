@@ -9,6 +9,25 @@
             30
         </session-timeout>
     </session-config>
+    <listener>
+        <listener-class>com.example.listener.DatabaseInitializer</listener-class>
+    </listener>
+    <context-param>
+        <param-name>url</param-name>
+        <param-value>jdbc:derby://localhost:1527/</param-value>
+    </context-param>
+    <context-param>
+        <param-name>database</param-name>
+        <param-value>SILabWeek7</param-value>
+    </context-param>
+    <context-param>
+        <param-name>username</param-name>
+        <param-value>username</param-value>
+    </context-param>
+    <context-param>
+        <param-name>password</param-name>
+        <param-value>password</param-value>
+    </context-param>
     <servlet>
         <servlet-name>DeliveryDeployment</servlet-name>
         <servlet-class>com.example.servlet.DeliveryServlet</servlet-class>
